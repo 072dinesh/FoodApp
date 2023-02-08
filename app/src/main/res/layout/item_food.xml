@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+
+        <variable
+            name="foodclick"
+            type="com.example.food_app.model.Result" />
+    </data>
+
+
+<androidx.cardview.widget.CardView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_10sdp"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            >
+
+            <ImageView
+                android:id="@+id/img_dish"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                app:loadImage="@{String.valueOf(foodclick.image)}"
+                android:scaleType="centerCrop"
+
+                android:src="@drawable/foodsec"
+                >
+
+            </ImageView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/img_dish"
+
+                android:layout_marginTop="-48dp"
+                android:alpha="0.65"
+                app:cardBackgroundColor="@color/black"
+
+
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="@dimen/_10sdp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="40dp"
+                    android:padding="10dp"
+
+                    android:text="Salad Mix | 25% AKG"
+                    android:textColor="@color/white">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+
+                    android:text="@{String.valueOf(foodclick.title)}"
+
+                    android:textColor="@color/white">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:padding="10dp"
+                    android:text="Salad Mix"
+                    android:textColor="@color/white">
+
+                </TextView>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="5dp">
+
+        </androidx.constraintlayout.widget.Guideline>
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

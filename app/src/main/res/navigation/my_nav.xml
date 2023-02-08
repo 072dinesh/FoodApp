@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.food_app.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_viewDetails"
+            app:destination="@id/viewDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewDetails"
+        android:name="com.example.food_app.fragment.show.ViewDetails"
+        android:label="ViewDetails"
+        tools:layout="@layout/fragment_view_details"
+        >
+        <argument
+            android:name="viewdatas"
+            app:argType="integer"
+
+            />
+        <action
+            android:id="@+id/action_viewDetails_to_ingredianFragment"
+            app:destination="@id/ingredianFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ingredianFragment"
+        android:name="com.example.food_app.fragment.listingredian.IngredianFragment"
+        android:label="IngredianFragment"
+        tools:layout="@layout/fragment_ingredian"
+
+        >
+
+        <argument
+            android:name="seedata"
+            app:argType="integer" />
+    </fragment>
+</navigation>

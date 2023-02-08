@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+
+        <variable
+            name="ingredientclick"
+            type="com.example.food_app.model.ExtendedIngredient" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="120dp"
+        android:layout_height="157dp"
+        android:layout_marginStart="5dp"
+       >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/foodsec"
+            app:loadImage="@{String.valueOf(ingredientclick.image)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:shapeAppearanceOverlay="@style/Circuler"
+            app:layout_constraintHorizontal_bias="0.051"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.google.android.material.imageview.ShapeableImageView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="88dp"
+            android:text="@{ingredientclick.name}"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/shapeableImageView"
+            app:layout_constraintHorizontal_bias="0.45"
+            app:layout_constraintStart_toStartOf="@+id/shapeableImageView"
+            app:layout_constraintTop_toTopOf="@+id/shapeableImageView">
+
+        </TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
