@@ -53,7 +53,6 @@ class ViewDetails : Fragment() {
                 it.body().let {
                     binding.showdata=it
 
-
                     it?.nutrition?.nutrients?.forEach {
                         //Log.d("mainssssss","${it.amount}")
                         var pers= it.amount!! * it.percentOfDailyNeeds!!/100

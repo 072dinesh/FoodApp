@@ -23,6 +23,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/foodsec"
+            android:layout_marginStart="5dp"
             app:loadImage="@{String.valueOf(ingredientclick.image)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:shapeAppearanceOverlay="@style/Circuler"
@@ -33,14 +34,13 @@
         </com.google.android.material.imageview.ShapeableImageView>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:layout_marginTop="88dp"
+            android:textAlignment="center"
             android:text="@{ingredientclick.name}"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/shapeableImageView"
-            app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toStartOf="@+id/shapeableImageView"
             app:layout_constraintTop_toTopOf="@+id/shapeableImageView">
 

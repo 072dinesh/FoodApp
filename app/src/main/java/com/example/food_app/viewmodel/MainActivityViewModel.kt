@@ -27,7 +27,7 @@ class MainActivityViewModel @Inject constructor(private val repository: RetroRep
 
     private fun getfood() {
         viewModelScope.launch {
-            val response: Response<resipi> =repository.getDataFromAPI("Pizza")
+            val response: Response<resipi> =repository.getDataFromAPI("chinese")
             if (response.isSuccessful){
                 response.body()?.let {
                     myResponse3.value=it
