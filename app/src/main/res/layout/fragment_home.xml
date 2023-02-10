@@ -14,6 +14,8 @@
     android:orientation="vertical"
     >
 
+
+
   <androidx.cardview.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -33,59 +35,17 @@
 
   </androidx.cardview.widget.CardView>
 
-  <com.facebook.shimmer.ShimmerFrameLayout
-      android:id="@+id/shimmerLayout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:shimmer_repeat_mode="restart"
-      app:shimmer_shape="radial">
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="5dp"
-        android:columnCount="2"
-        android:rowCount="3"
-
-
-
-        >
-
-      <include layout="@layout/shimmer_item"></include>
-
-      <include layout="@layout/shimmer_item"></include>
-
-      <include layout="@layout/shimmer_item"></include>
-
-      <include layout="@layout/shimmer_item"></include>
-
-      <include layout="@layout/shimmer_item"></include>
-      <include layout="@layout/shimmer_item"></include>
-
-    </GridLayout>
-
-  </com.facebook.shimmer.ShimmerFrameLayout>
-
-
-  <androidx.recyclerview.widget.RecyclerView
+  <com.todkars.shimmer.ShimmerRecyclerView
+      android:id="@+id/recyclerview"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:columnWidth="150dp"
-      android:id="@+id/recyclerview"
+      android:orientation="vertical"
       app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-      app:spanCount="2"
-      tools:itemCount="20"
-      android:horizontalSpacing="15dp"
-      android:layoutAnimation="@anim/item_layout_animtion"
-
-      android:verticalSpacing="15dp"
+      app:shimmer_recycler_layout="@layout/shimmer_item"
       tools:listitem="@layout/item_food"
-
-      >
-
-  </androidx.recyclerview.widget.RecyclerView>
+      app:shimmer_recycler_item_count="10" />
 
 
 </LinearLayout>
+
 </layout>

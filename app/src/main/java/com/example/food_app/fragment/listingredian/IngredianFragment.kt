@@ -1,10 +1,12 @@
 package com.example.food_app.fragment.listingredian
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -30,6 +32,7 @@ class IngredianFragment : Fragment() {
     private val  viewmodelsecode: ViewModelSecond by viewModels()
     private lateinit var adapter : IngredianAdepter
     private val args by navArgs<IngredianFragmentArgs>()
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +44,7 @@ class IngredianFragment : Fragment() {
         setupUi()
             return binding.root
     }
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun setupUi(){
 
         args.seedata.let{
@@ -56,21 +60,19 @@ class IngredianFragment : Fragment() {
     }
     private fun setingredients()
     {
-        viewmodelsecode.myResponseView.observe(viewLifecycleOwner, Observer {
+        viewmodelsecode.myResponseView.observe(viewLifecycleOwner, Observer { response ->
 
 
-            it.let {
 
-                it.body().let {
+                response.data?.let { recipe ->
 
-                    it?.extendedIngredients.let {
-                        adapter.setData(it!!.filterNotNull())
+                    recipe.extendedIngredients.let { ingredients ->
+                        adapter.setData(ingredients?.filterNotNull() ?: emptyList())
                     }
                     binding.shimmerLayouts.stopShimmer()
                     binding.shimmerLayouts.visibility=View.GONE
 
                 }
-            }
         })
 
     }

@@ -347,12 +347,12 @@
                     android:id="@+id/tv_See_detail_recipes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
                     android:text="see_details"
                     android:textColor="#25D32C"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/res"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline4" />
+                    app:layout_constraintBottom_toBottomOf="@+id/ingredients_text"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                    app:layout_constraintTop_toTopOf="@+id/ingredients_text" />
 
                 <TextView
                     android:id="@+id/ingredients_text"
@@ -360,14 +360,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
 
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="24dp"
                     android:text="Ingredients"
                     android:textColor="#0A0B0A"
                     android:textSize="23sp"
                     app:layout_constraintEnd_toStartOf="@+id/tv_See_detail_recipes"
-                    app:layout_constraintHorizontal_bias="0.026"
+                    app:layout_constraintHorizontal_bias="0.079"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_carb_per" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_progress" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/res"
