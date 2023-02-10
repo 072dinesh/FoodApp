@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(private val repository: RetroRepository):ViewModel() {
    // lateinit var liveDataList: MutableLiveData<List<GridViewData>>
-   val myResponse3 :MutableLiveData<resipi> = MutableLiveData()
+   val myResponseIngredian :MutableLiveData<resipi> = MutableLiveData()
 
     val myResponse2 :MutableLiveData<resipi> = MutableLiveData()
     val myResponse4 :MutableLiveData<resipi> = MutableLiveData()
@@ -26,7 +26,7 @@ class MainActivityViewModel @Inject constructor(private val repository: RetroRep
             val response: Response<resipi> =repository.getDataFromAPI(foodmodel)
             if (response.isSuccessful){
                 response.body()?.let {
-                    myResponse3.value=it
+                    myResponseIngredian.value=it
                     // myResponse3.value.results
                     //myAdepter.setData(it)
                 }
@@ -40,7 +40,7 @@ class MainActivityViewModel @Inject constructor(private val repository: RetroRep
             val response: Response<resipi> =repository.getDataFromAPIso()
             if (response.isSuccessful){
                 response.body()?.let {
-                    myResponse3.value=it
+                    myResponseIngredian.value=it
                     // myResponse3.value.results
                     //myAdepter.setData(it)
                 }

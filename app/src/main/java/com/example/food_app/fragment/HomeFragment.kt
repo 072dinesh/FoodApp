@@ -100,7 +100,7 @@ class HomeFragment : Fragment() {
 
 
     private fun setoverview(){
-        viewmodel.myResponse3.observe(viewLifecycleOwner, Observer {
+        viewmodel.myResponseIngredian.observe(viewLifecycleOwner, Observer {
 
             it.results?.let { result ->
                 //Timber.e("QQQQQQq:",result.toString())
@@ -117,7 +117,7 @@ class HomeFragment : Fragment() {
     private fun setobserverss()
     {
 
-        viewmodel.myResponse3.observe(viewLifecycleOwner, Observer {
+        viewmodel.myResponseIngredian.observe(viewLifecycleOwner, Observer {
 
 
             it.results?.let { result ->

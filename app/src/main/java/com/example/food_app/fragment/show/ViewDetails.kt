@@ -55,12 +55,8 @@ class ViewDetails : Fragment() {
 
 
 
-
-
-
-
     private fun settupoverview(){
-        viewmodelsecode .myResponse2.observe(viewLifecycleOwner, Observer {
+        viewmodelsecode .myResponseView.observe(viewLifecycleOwner, Observer {
         var def = DecimalFormat("#.##")
             it.let {
                 it.body().let {
@@ -131,7 +127,7 @@ class ViewDetails : Fragment() {
 
     private fun setingredients()
     {
-        viewmodelsecode.myResponse2.observe(viewLifecycleOwner, Observer {
+        viewmodelsecode.myResponseView.observe(viewLifecycleOwner, Observer {
 
 
             it.let {

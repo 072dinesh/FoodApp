@@ -56,7 +56,7 @@ class IngredianFragment : Fragment() {
     }
     private fun setingredients()
     {
-        viewmodelsecode.myResponse2.observe(viewLifecycleOwner, Observer {
+        viewmodelsecode.myResponseView.observe(viewLifecycleOwner, Observer {
 
 
             it.let {

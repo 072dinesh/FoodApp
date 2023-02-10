@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelSecond @Inject constructor(private val repository: RetroRepository): ViewModel() {
 
-    val myResponse2 : MutableLiveData<Response<Foodresipi>> = MutableLiveData()
+    val myResponseView : MutableLiveData<Response<Foodresipi>> = MutableLiveData()
 
 
     fun getPost2(number: Int){
@@ -21,7 +21,7 @@ class ViewModelSecond @Inject constructor(private val repository: RetroRepositor
 
             val responses: Response<Foodresipi> = repository.getPost2(number)
 
-                    myResponse2.value=responses
+            myResponseView.value=responses
 
         }
 
