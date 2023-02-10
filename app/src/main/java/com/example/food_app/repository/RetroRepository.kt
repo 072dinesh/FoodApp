@@ -17,6 +17,11 @@ class RetroRepository @Inject constructor(private val retroInstance: RetroServie
         return retroInstance.getPost2(id)
     }
 
+    suspend fun getDataFromAPIso():Response<resipi>{
+        return retroInstance.getDataFromAPIso()
+    }
+
+
 //    suspend fun getCustomPosts(id:Int):Response<resipi>{
 //        return retroInstance.getCustomePost(id)
 //    }

@@ -66,11 +66,24 @@ class IngredianFragment : Fragment() {
                     it?.extendedIngredients.let {
                         adapter.setData(it!!.filterNotNull())
                     }
+                    binding.shimmerLayouts.stopShimmer()
+                    binding.shimmerLayouts.visibility=View.GONE
 
                 }
             }
         })
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerLayouts.startShimmer()
+    }
+
+    override fun onPause() {
+
+        super.onPause()
+        binding.shimmerLayouts.stopShimmer()
     }
 
 

@@ -39,17 +39,30 @@ class ViewDetails : Fragment() {
         settupoverview()
         setingredients()
 
+        binding.backbtn.setOnClickListener {
+
+            findNavController().navigateUp()
+
+        }
 
 
     return binding.root
 
     }
 
+
+
+
+
+
+
+
+
+
     private fun settupoverview(){
         viewmodelsecode .myResponse2.observe(viewLifecycleOwner, Observer {
         var def = DecimalFormat("#.##")
             it.let {
-
                 it.body().let {
                     binding.showdata=it
 
@@ -88,7 +101,7 @@ class ViewDetails : Fragment() {
                         }
 
                     }
-                    var rating : Float = it?.healthScore!!.toFloat()*5/100
+                    val rating : Float = it?.healthScore!!.toFloat()*5/100
                     binding.rating.rating = rating
 
 
@@ -130,17 +143,11 @@ class ViewDetails : Fragment() {
                     }
 
                 }
-
-
             }
 
         })
 
     }
-
-
-
-
 
     private fun setupUi(){
 
@@ -149,7 +156,9 @@ class ViewDetails : Fragment() {
             viewmodelsecode.getPost2(it)
 
         }
-
+        binding.backbtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         adapter= ViewAdapter()
         binding.res.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)

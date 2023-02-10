@@ -15,6 +15,43 @@
     android:layout_height="wrap_content"
     tools:context="fragment.listingredian.IngredianFragment"
     >
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayouts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shimmer_repeat_mode="restart"
+        app:shimmer_shape="radial">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:columnCount="2"
+            android:orientation="vertical"
+            android:rowCount="3"
+
+
+            >
+
+            <include layout="@layout/shimmer_item2"></include>
+
+            <include layout="@layout/shimmer_item2"></include>
+
+            <include layout="@layout/shimmer_item2"></include>
+
+            <include layout="@layout/shimmer_item2"></include>
+
+            <include layout="@layout/shimmer_item2"></include>
+
+            <include layout="@layout/shimmer_item2"></include>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

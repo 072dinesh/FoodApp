@@ -9,6 +9,7 @@ import com.example.food_app.repository.RetroRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,14 +21,23 @@ class MainActivityViewModel @Inject constructor(private val repository: RetroRep
     val myResponse4 :MutableLiveData<resipi> = MutableLiveData()
 
 
-    init {
-        getfood()
+     fun getfood(foodmodel:String) {
+        viewModelScope.launch {
+            val response: Response<resipi> =repository.getDataFromAPI(foodmodel)
+            if (response.isSuccessful){
+                response.body()?.let {
+                    myResponse3.value=it
+                    // myResponse3.value.results
+                    //myAdepter.setData(it)
+                }
+            }
+
+        }
     }
 
-
-    private fun getfood() {
+    fun getDataFromAPIso() {
         viewModelScope.launch {
-            val response: Response<resipi> =repository.getDataFromAPI("chinese")
+            val response: Response<resipi> =repository.getDataFromAPIso()
             if (response.isSuccessful){
                 response.body()?.let {
                     myResponse3.value=it
