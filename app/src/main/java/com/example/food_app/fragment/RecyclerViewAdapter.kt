@@ -8,13 +8,16 @@ import com.example.food_app.databinding.ItemFoodBinding
 import com.example.food_app.model.Result
 import com.example.food_app.util.DiffUtilExt
 
-class RecyclerViewAdapter(val onMainClick: (Result) -> Unit) : RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
+class RecyclerViewAdapter(val onMainClick: (Result) -> Unit) :
+    RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
 
-//private var listData : List<GridViewData>?=null
-private var callList = emptyList<Result>()
-    class MyViewHolder(private val binding : ItemFoodBinding):RecyclerView.ViewHolder(binding.root) {
+    //private var listData : List<GridViewData>?=null
+    private var callList = emptyList<Result>()
+
+    class MyViewHolder(private val binding: ItemFoodBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            currentItem:Result,
+            currentItem: Result,
             onMainClick: (Result) -> Unit
 //            onAlbumClick: (resipi) -> Unit
         ) {
@@ -25,6 +28,7 @@ private var callList = emptyList<Result>()
 
 
         }
+
         companion object {
             fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
@@ -33,6 +37,7 @@ private var callList = emptyList<Result>()
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder.from(parent)
     }
@@ -47,11 +52,12 @@ private var callList = emptyList<Result>()
         val currentItem = callList.getOrNull(position)
 
         currentItem?.let {
-            holder.bind(it,onMainClick)
+            holder.bind(it, onMainClick)
         }
 
     }
-    fun setData(Result:List<Result>){
+
+    fun setData(Result: List<Result>) {
 //        this.callList= user
 //        notifyDataSetChanged()
 

@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.food_app.databinding.FragmentHomeBinding
+import com.example.food_app.databinding.FragmentViewDetailsBinding
 import com.example.food_app.util.NetworkResult
 import com.example.food_app.util.snackBar
 import com.example.food_app.viewmodel.MainActivityViewModel
@@ -28,11 +29,14 @@ import java.util.*
 class HomeFragment : Fragment() {
     lateinit var toggle: ActionBarDrawerToggle
 
-    lateinit var binding: FragmentHomeBinding
-//lateinit var recyclerViewAdapter: RecyclerViewAdapter
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private val viewmodel: MainActivityViewModel by viewModels()
 
-    private lateinit var adapter : RecyclerViewAdapter
+    private lateinit var adapter: RecyclerViewAdapter
+
+    private var lastquery = ""
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
@@ -40,16 +44,17 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         var view = binding.root
-//        shimmerLayout.startShimmer()
+
         setoverview()
         setobserverss()
         setRecyclerview()
-        //setobservers()
-        viewmodel.getDataFromAPIso()
-        viewmodel.getfood(binding.searchView.query.toString())
+
+//        viewmodel.getDataFromAPIso()
+//        viewmodel.getfood(binding.searchView.query.toString())
+
 
         return view
 
@@ -59,30 +64,26 @@ class HomeFragment : Fragment() {
     private fun setRecyclerview() {
         adapter = RecyclerViewAdapter(
             onMainClick = {
-               // it.id.toString()
+                // it.id.toString()
                 it.id?.let {
                     //Toast.makeText(requireContext(), "${it.id.toString()}", Toast.LENGTH_LONG).show()
-                    var action =HomeFragmentDirections.actionHomeFragmentToViewDetails(it)
+                    var action = HomeFragmentDirections.actionHomeFragmentToViewDetails(it)
                     findNavController().navigate(action)
                 }
 
             },
 
-        )
-        var list=ArrayList<com.example.food_app.model.Result>()
-        for(i in list)
-        {
-            if (i?.title?.lowercase(Locale.ROOT)!!.contains(binding.searchView.query))
-            {
+            )
+        var list = ArrayList<com.example.food_app.model.Result>()
+        for (i in list) {
+            if (i?.title?.lowercase(Locale.ROOT)!!.contains(binding.searchView.query)) {
                 list.add(i)
             }
         }
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             //Toast.makeText(requireContext(),"error",Toast.LENGTH_SHORT).show()
 
-        }
-        else
-        {
+        } else {
             Timber.e(list.toString())
             adapter.setData(list)
         }
@@ -92,9 +93,9 @@ class HomeFragment : Fragment() {
     }
 
 
-
-    private fun setoverview(){
-        viewmodel.myResponseIngredian.observe(viewLifecycleOwner, Observer {respon->
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun setoverview() {
+        viewmodel.myResponseIngredian.observe(viewLifecycleOwner, Observer { respon ->
 //
 //            it.results?.let { result ->
 //                //Timber.e("QQQQQQq:",result.toString())
@@ -105,7 +106,7 @@ class HomeFragment : Fragment() {
 ////            binding.shimmerLayout.visibility=View.GONE
 
 
-            when(respon){
+            when (respon) {
                 is NetworkResult.Error -> {
                     respon.message?.snackBar(requireView(), requireContext())
                 }
@@ -119,9 +120,9 @@ class HomeFragment : Fragment() {
 
                 }
                 is NetworkResult.Success -> {
-                    respon.data?.results.let {resci->
-
-                        adapter.setData(resci?.filterNotNull()?: emptyList())
+                    respon.data?.results.let { resci ->
+                        binding.recyclerview.hideShimmer()
+                        adapter.setData(resci?.filterNotNull() ?: emptyList())
                     }
                 }
             }
@@ -129,23 +130,27 @@ class HomeFragment : Fragment() {
         })
 
 
-
     }
 
 
-    private fun setobserverss()
-    {
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun setobserverss() {
 
         viewmodel.myResponseIngredian.observe(viewLifecycleOwner, Observer {
 
             it.data?.results?.let { result ->
 
-                var list=ArrayList<com.example.food_app.model.Result>()
-                binding.searchView.setOnQueryTextListener(object :OnQueryTextListener{
+                var list = ArrayList<com.example.food_app.model.Result>()
+                binding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
                     @RequiresApi(Build.VERSION_CODES.M)
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        viewmodel.getfood(query.toString())
-                        setRecyclerview()
+                        if (!query.isNullOrEmpty() && query != lastquery) {
+                            lastquery = query
+                            viewmodel.getfood(query.toString())
+                        }
+                        //viewmodel.getfood(query.toString())
+
+                        //setRecyclerview()
 
                         //Toast.makeText(requireContext(),"$query",Toast.LENGTH_SHORT).show()
                         return true
@@ -154,15 +159,11 @@ class HomeFragment : Fragment() {
 
                     @RequiresApi(Build.VERSION_CODES.M)
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        viewmodel.getfood(newText.toString())
-                        for(i in result)
-                        {
-                            if (i?.title?.lowercase(Locale.ROOT)!!.contains(binding.searchView.query))
-                            {
-                                list.add(i)
-                            }
+                        // viewmodel.getfood(newText.toString())
+                        if (!newText.isNullOrEmpty() && newText != lastquery) {
+                            lastquery = newText
+                            viewmodel.getfood(newText.toString())
                         }
-                        adapter.setData(list)
 
                         return true
                     }
@@ -187,7 +188,10 @@ class HomeFragment : Fragment() {
 //        binding.shimmerLayout.stopShimmer()
 //    }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 
 }

@@ -20,6 +20,7 @@ import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
 
+@RequiresApi(Build.VERSION_CODES.M)
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(private val repository: RetroRepository,application: Application):BaseViewModel(application) {
    // lateinit var liveDataList: MutableLiveData<List<GridViewData>>
@@ -33,6 +34,12 @@ class MainActivityViewModel @Inject constructor(private val repository: RetroRep
     val allUsers: LiveData<NetworkResult<resipi>>
         get() = _allUsers
 
+
+
+    init {
+        getDataFromAPIso()
+
+    }
 
 //     fun getfood(foodmodel:String) {
 //        viewModelScope.launch {

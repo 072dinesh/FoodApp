@@ -18,38 +18,36 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelSecond @Inject constructor(private val repository: RetroRepository,application: Application): BaseViewModel(application) {
+class ViewModelSecond @Inject constructor(
+    private val repository: RetroRepository,
+    application: Application
+) : BaseViewModel(application) {
 
-    val myResponseView : MutableLiveData<NetworkResult<Foodresipi>> = MutableLiveData()
+    val myResponseView: MutableLiveData<NetworkResult<Foodresipi>> = MutableLiveData()
     var mContext = application
 
-//    fun getPost2(number: Int){
-//        viewModelScope.launch {
-//
-//            val responses: Response<Foodresipi> = repository.getPost2(number)
-//
-//            myResponseView.value=responses
-//
-//        }
-//
-//    }
 
+    private var vid = -1
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun getPost2(id:Int){
+    fun getPost2(id: Int) {
 
+        if (vid == id) {
+            return
+        } else {
+            vid = id
+        }
         viewModelScope.launch {
             myResponseView.value = NetworkResult.Loading()
 
-            if (isConnected()){
+            if (isConnected()) {
 
 
-                val response5 : Response<Foodresipi> = repository.getPost2(id)
+                val response5: Response<Foodresipi> = repository.getPost2(id)
                 myResponseView.value = handleResponse(response5)
 
 
-            }
-            else {
+            } else {
                 myResponseView.value = NetworkResult.Error(
                     mContext.getString(R.string.no_internet)
                 )
@@ -58,9 +56,6 @@ class ViewModelSecond @Inject constructor(private val repository: RetroRepositor
 
         }
     }
-
-
-
 
 
 }
